@@ -19,7 +19,12 @@ public class GatwayApplication {
 		return builder.routes()
 				.route("EVENT-MANAGEMENT", r -> r.path("/events/**")
 						.uri("lb://EVENT-MANAGEMENT"))
+<<<<<<< HEAD
 
+=======
+				.route("FEEDBACK-SERVICE", r -> r.path("/feedback/**")
+						.uri("lb://FEEDBACK-SERVICE"))
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
 				.build();
 	}
 }

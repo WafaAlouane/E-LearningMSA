@@ -3,7 +3,12 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Eureka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EventManagement/src/main/java" charset="UTF-8" />
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/Gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taskManagement/src/main/java" charset="UTF-8" />
+=======
+    <file url="file://$PROJECT_DIR$/Feedback-Serrvice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Gateway/src/main/java" charset="UTF-8" />
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
   </component>
 </project>

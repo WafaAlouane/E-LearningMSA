@@ -26,7 +26,10 @@ services:
     networks:
       - projectMsA
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
   event-management:
     image: doussa1998/mini-project-event:latest
     container_name: event
@@ -41,10 +44,32 @@ services:
       - spring.datasource.username=sa
       - spring.datasource.password=
       - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+<<<<<<< HEAD
 
     networks:
       - projectMsA
 
+=======
+    networks:
+      - projectMsA
+
+  feedback-service:
+    image: doussa1998/mini-project-event:latest
+    container_name: feedback
+    ports:
+      - "8086:8086"
+    depends_on:
+      - eureka
+    environment:
+      - spring.application.name=FEEDBACK-SERVICE
+      - server.port=8086
+      - spring.datasource.url=jdbc:h2:mem:feedbackdb;DB_CLOSE_ON_EXIT=FALSE
+      - spring.datasource.username=sa
+      - spring.datasource.password=
+      - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+    networks:
+      - projectMsA
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
 
 networks:
   projectMsA:

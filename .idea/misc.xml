@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Eureka/pom.xml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Gatway/pom.xml" />
         <option value="$PROJECT_DIR$/taskManagement/pom.xml" />
         <option value="$PROJECT_DIR$/EventManagement/pom.xml" />
@@ -17,6 +18,15 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17 (2)" project-jdk-type="JavaSDK">
+=======
+        <option value="$PROJECT_DIR$/Gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/EventManagement/pom.xml" />
+        <option value="$PROJECT_DIR$/Feedback-Serrvice/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

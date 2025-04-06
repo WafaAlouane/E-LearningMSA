@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+<<<<<<< HEAD
+=======
+      <profile default="true" name="Default" enabled="true" />
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,26 +13,42 @@
         <module name="Eureka" />
         <module name="Gateway" />
       </profile>
+<<<<<<< HEAD
       <profile name="Annotation profile for EventManagement" enabled="true">
+=======
+      <profile name="Annotation profile for Feedback-Serrvice" enabled="true">
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
+<<<<<<< HEAD
         <module name="EventManagement" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="taskManagement" target="17" />
     </bytecodeTargetLevel>
+=======
+        <module name="Feedback-Serrvice" />
+        <module name="EventManagement" />
+      </profile>
+    </annotationProcessing>
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Eureka" options="-parameters" />
       <module name="EventManagement" options="-parameters" />
+<<<<<<< HEAD
       <module name="Gateway" options="-parameters" />
       <module name="taskManagement" options="-parameters" />
+=======
+      <module name="Feedback-Serrvice" options="-parameters" />
+      <module name="Gateway" options="-parameters" />
+>>>>>>> 9ac2a4a07a55e67de20ff61660bdb8e0ada13e6b
     </option>
   </component>
 </project>

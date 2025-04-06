@@ -1,8 +1,8 @@
 package com.example.feedbackserrvice.Controller;
 
+
 import com.example.feedbackserrvice.Entity.Feedback;
 import com.example.feedbackserrvice.Service.FeedbackService;
-import com.example.feedbackserrvice.Service.GeminiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +16,6 @@ public class FeedbackController {
 
     @Autowired
     private FeedbackService feedbackService;
-
-    @Autowired
-    private GeminiService geminiService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Feedback>> getAllFeedbacks() {
@@ -34,10 +31,6 @@ public class FeedbackController {
 
     @PostMapping("/addfeedback")
     public ResponseEntity<Feedback> addFeedback(@RequestBody Feedback feedback) {
-        // Appel à Gemini pour reformuler le commentaire
-        String professionalComment = geminiService.makeProfessional(feedback.getComment());
-        feedback.setComment(professionalComment);
-
         Feedback savedFeedback = feedbackService.saveFeedback(feedback);
         return ResponseEntity.ok(savedFeedback);
     }
@@ -69,3 +62,4 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbackService.getFeedbacksByStudentId(studentId));
     }
 }
+
