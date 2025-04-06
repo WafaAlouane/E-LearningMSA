@@ -1,0 +1,65 @@
+services:
+  eureka:
+    image: doussa1998/mini-project-eureka:latest
+    container_name: eureka-serveur
+    ports:
+      - "8761:8761"
+    environment:
+      - spring.application.name=eureka
+      - server.port=8761
+      - eureka.client.register-with-eureka=false
+      - eureka.client.fetch-registry=false
+    networks:
+      - projectMsA
+
+  gateway:
+    image: doussa1998/mini-project-gateway:latest
+    container_name: gateway
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka
+    environment:
+      - spring.application.name=GATEWAY
+      - server.port=8082
+      - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+    networks:
+      - projectMsA
+
+  event-management:
+    image: doussa1998/mini-project-event:latest
+    container_name: event
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka
+    environment:
+      - spring.application.name=EVENT-MANAGEMENT
+      - server.port=8081
+      - spring.datasource.url=jdbc:h2:mem:eventDB;DB_CLOSE_ON_EXIT=FALSE
+      - spring.datasource.username=sa
+      - spring.datasource.password=
+      - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+    networks:
+      - projectMsA
+
+  feedback-service:
+    image: doussa1998/mini-project-event:latest
+    container_name: feedback
+    ports:
+      - "8086:8086"
+    depends_on:
+      - eureka
+    environment:
+      - spring.application.name=FEEDBACK-SERVICE
+      - server.port=8086
+      - spring.datasource.url=jdbc:h2:mem:feedbackdb;DB_CLOSE_ON_EXIT=FALSE
+      - spring.datasource.username=sa
+      - spring.datasource.password=
+      - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
+    networks:
+      - projectMsA
+
+networks:
+  projectMsA:
+    driver: bridge
