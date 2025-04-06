@@ -9,13 +9,14 @@
         <module name="Eureka" />
         <module name="Gateway" />
       </profile>
-      <profile name="Annotation profile for EventManagement" enabled="true">
+      <profile name="Annotation profile for MicroService_Course_Aziz" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
+        <module name="MicroService_Course_Aziz" />
         <module name="EventManagement" />
       </profile>
     </annotationProcessing>
@@ -28,6 +29,7 @@
       <module name="Eureka" options="-parameters" />
       <module name="EventManagement" options="-parameters" />
       <module name="Gateway" options="-parameters" />
+      <module name="MicroService_Course_Aziz" options="-parameters" />
       <module name="taskManagement" options="-parameters" />
     </option>
   </component>

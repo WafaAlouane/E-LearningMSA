@@ -17,7 +17,6 @@ public class CourseController {
 
     private final CourseraCourseService courseraCourseService;
 
-    // ✅ Use Constructor Injection instead of field injection
     @Autowired
     public CourseController(CourseraCourseService courseraCourseService) {
         this.courseraCourseService = courseraCourseService;
@@ -37,13 +36,13 @@ public class CourseController {
     }
 
 
-    // ✅ Get all courses
+    //  Get all courses
     @GetMapping
     public ResponseEntity<List<Course>> getAllCourses() {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    // ✅ Get a single course by ID
+    // Get a single course by ID
     @GetMapping("/{id}")
     public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
         Optional<Course> course = courseService.getCourseById(id);
@@ -51,13 +50,13 @@ public class CourseController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // ✅ Create a new course
+    //  Create a new course
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         return ResponseEntity.ok(courseService.createCourse(course));
     }
 
-    // ✅ Update an existing course
+    // Update an existing course
     @PutMapping("/{id}")
     public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
         try {
@@ -68,7 +67,7 @@ public class CourseController {
         }
     }
 
-    // ✅ Delete a course
+    // Delete a course
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         try {
