@@ -62,5 +62,28 @@ public class EventService {
         return eventRepository.findEventsByCriteria(name, location, startDate, endDate);
     }
 
+    public byte[] generateQRCode(Long eventId, int width, int height) throws WriterException, IOException {
+        Event event = getEventById(eventId);
+        if (event == null) {
+            throw new IllegalArgumentException("Événement non trouvé avec l'ID : " + eventId);
+        }
 
+        // Créer une chaîne contenant les détails de l'événement
+        String eventDetails = String.format(
+                "Event ID: %d\nName: %s\nDate: %s\nLocation: %s",
+                event.getId(),
+                event.getName(),
+                event.getDateTime().toString(),
+                event.getLocation()
+        );
+
+        // Générer le QR Code
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(eventDetails, BarcodeFormat.QR_CODE, width, height);
+
+        // Convertir le QR Code en image PNG sous forme de byte[]
+        ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
+        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
+        return pngOutputStream.toByteArray();
+    }
 }
