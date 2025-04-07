@@ -1,6 +1,7 @@
 package com.example.eventesb.controllers;
 
 import com.example.eventesb.entities.Event;
+import com.example.eventesb.services.EmailService;
 import com.example.eventesb.services.EventService;
 import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Event>> getAllEvents() {
@@ -41,6 +44,15 @@ public class EventController {
     @PostMapping("/addevent")
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event savedEvent = eventService.addEvent(event);
+        // Send email notification after feedback is saved
+        String subject = "New Feedback Submitted";
+        String message = "A new feedback has been submitted:\n\n" +
+                "Event: " + savedEvent.getName() + "\n" +
+                "Date: " + savedEvent.getDateTime() + "\n" +
+                "Localisation: " + savedEvent.getLocation();
+        // Replace with the recipient email (e.g., teacher or admin email)
+        String recipientEmail = "wafa.alouane.2001@gmail.com";  // Change this to the appropriate recipient email
+        emailService.sendVerificationCode(recipientEmail, message);
         return ResponseEntity.ok(savedEvent);
     }
 
@@ -131,4 +143,6 @@ public class EventController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }
