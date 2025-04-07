@@ -53,5 +53,53 @@ public class EventController {
         return result.equals("Événement supprimé") ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/export/csv")
+    public ResponseEntity<byte[]> exportEventsToCSV() {
+        logger.info("Exporting events to CSV...");
+        List<Event> events = eventService.getAllEvents();
 
+        if (events.isEmpty()) {
+            logger.warning("No events found to export.");
+            return ResponseEntity.noContent().build(); // Retourne 204 si aucune donnée
+        }
+
+        StringWriter stringWriter = new StringWriter();
+        try (CSVWriter csvWriter = new CSVWriter(stringWriter)) {
+            // En-tête du CSV
+            String[] header = {"ID", "Name", "Description", "DateTime", "Location"};
+            csvWriter.writeNext(header);
+
+            // Formatteur pour la date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+            // Ajouter chaque événement dans le CSV
+            for (Event event : events) {
+                String[] row = {
+                        String.valueOf(event.getId()),
+                        event.getName(),
+                        event.getDescription(),
+                        event.getDateTime() != null ? event.getDateTime().format(formatter) : "N/A",
+                        event.getLocation()
+                };
+                csvWriter.writeNext(row);
+            }
+
+            // Convertir le contenu en bytes avec encodage UTF-8 pour éviter les problèmes de caractères
+            byte[] csvBytes = stringWriter.toString().getBytes("UTF-8");
+
+            // Configurer les en-têtes HTTP pour le téléchargement
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", "events.csv");
+            headers.setContentLength(csvBytes.length);
+
+            logger.info("CSV file generated successfully.");
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(csvBytes);
+        } catch (Exception e) {
+            logger.severe("Error while generating CSV: " + e.getMessage());
+            return ResponseEntity.status(500).body(null); // Erreur serveur en cas de problème
+        }
+    }
 }
