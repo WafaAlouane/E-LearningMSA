@@ -54,11 +54,10 @@ services:
     ports:
       - "8083:8083"
     depends_on:
-      - gateway
       - eureka
       - mysql
     environment:
-      - spring.application.name=GestionPartenaires
+      - spring.application.name=GESTIONPARTENAIRES
       - server.port=8083
       - eureka.client.service-url.defaultZone=http://eureka:8761/eureka
       - eureka.client.register-with-eureka=true
