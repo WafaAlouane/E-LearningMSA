@@ -34,10 +34,11 @@ public class FeedbackController {
 
     @PostMapping("/addfeedback")
     public ResponseEntity<Feedback> addFeedback(@RequestBody Feedback feedback) {
-        // Appel à Gemini pour reformuler le commentaire
+        // Call Gemini to reformulate the comment
         String professionalComment = geminiService.makeProfessional(feedback.getComment());
         feedback.setComment(professionalComment);
 
+        // Save the feedback after reformulation
         Feedback savedFeedback = feedbackService.saveFeedback(feedback);
         return ResponseEntity.ok(savedFeedback);
     }

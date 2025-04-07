@@ -18,6 +18,7 @@ public class Feedback {
     private Long teacherId;
 
     private int rating;
+    @Column(name = "comment", length = 10000)  // or use TEXT for larger comments
     private String comment;
 
     private LocalDateTime createdAt;
