@@ -4,12 +4,15 @@ import com.example.eventesb.entities.Event;
 import com.example.eventesb.services.EventService;
 import com.opencsv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.StringWriter;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Logger;
@@ -100,6 +103,32 @@ public class EventController {
         } catch (Exception e) {
             logger.severe("Error while generating CSV: " + e.getMessage());
             return ResponseEntity.status(500).body(null); // Erreur serveur en cas de problème
+        }
+    }
+    @GetMapping("/filter")
+    public ResponseEntity<List<Event>> filterEvents(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        List<Event> events = eventService.filterEvents(name, location, startDate, endDate);
+        return ResponseEntity.ok(events);
+    }
+    @GetMapping("/{id}/qrcode")
+    public ResponseEntity<byte[]> generateQRCode(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "300") int width,
+            @RequestParam(defaultValue = "300") int height) {
+        try {
+            byte[] qrCodeImage = eventService.generateQRCode(id, width, height);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.setContentLength(qrCodeImage.length);
+
+            return new ResponseEntity<>(qrCodeImage, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

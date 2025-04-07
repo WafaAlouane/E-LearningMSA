@@ -3,9 +3,17 @@ package com.example.eventesb.services;
 
 import com.example.eventesb.entities.Event;
 import com.example.eventesb.repositories.EventRepository;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +57,9 @@ public class EventService {
         } else {
             return "Événement non trouvé";
         }
+    }
+    public List<Event> filterEvents(String name, String location, LocalDateTime startDate, LocalDateTime endDate) {
+        return eventRepository.findEventsByCriteria(name, location, startDate, endDate);
     }
 
 
