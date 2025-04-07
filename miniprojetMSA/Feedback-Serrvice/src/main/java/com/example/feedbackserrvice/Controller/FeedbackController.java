@@ -5,6 +5,9 @@ import com.example.feedbackserrvice.Service.EmailService;
 import com.example.feedbackserrvice.Service.FeedbackService;
 import com.example.feedbackserrvice.Service.GeminiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +55,7 @@ public class FeedbackController {
                 "Rating: " + savedFeedback.getRating() + "\n" +
                 "Comment: " + savedFeedback.getComment();
         // Replace with the recipient email (e.g., teacher or admin email)
-        String recipientEmail = "teacher@example.com";  // Change this to the appropriate recipient email
+        String recipientEmail = "firaslabidi17@gmail.com";  // Change this to the appropriate recipient email
         emailService.sendVerificationCode(recipientEmail, message);
 
         return ResponseEntity.ok(savedFeedback);
@@ -89,4 +92,25 @@ public class FeedbackController {
     public ResponseEntity<List<Feedback>> getByStudent(@PathVariable Long studentId) {
         return ResponseEntity.ok(feedbackService.getFeedbacksByStudentId(studentId));
     }
+
+    @GetMapping("/{id}/qrcode")
+    public ResponseEntity<byte[]> generateQRCode(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "300") int width,
+            @RequestParam(defaultValue = "300") int height) {
+        try {
+            // Call the generateQRCode method on the feedbackService instance
+            byte[] qrCodeImage = feedbackService.generateQRCode(id, width, height);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.setContentLength(qrCodeImage.length);
+
+            return new ResponseEntity<>(qrCodeImage, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
