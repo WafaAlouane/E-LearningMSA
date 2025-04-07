@@ -1,20 +1,45 @@
 package com.example.feedbackserrvice.Service;
 
-
 import com.example.feedbackserrvice.Entity.Feedback;
 import com.example.feedbackserrvice.Repository.FeedbackRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class FeedbackService {
 
+    private static final Logger logger = LoggerFactory.getLogger(FeedbackService.class);
+
     @Autowired
     private FeedbackRepository feedbackRepository;
 
+
     public Feedback saveFeedback(Feedback feedback) {
-        return feedbackRepository.save(feedback);
+        try {
+            logger.info("Saving feedback for course ID: {}, student ID: {}", feedback.getCourseId(), feedback.getStudentId());
+
+            // Save the feedback
+            Feedback savedFeedback = feedbackRepository.save(feedback);
+            logger.info("Feedback saved with ID: {}", savedFeedback.getId());
+
+            // Send an email notification
+            String subject = "New Feedback Submitted";
+            String text = "A new feedback has been submitted:\n\n" +
+                    "Rating: " + feedback.getRating() + "\n" +
+                    "Comment: " + feedback.getComment();
+
+            // Sending email to the teacher (hardcoded email)
+            logger.info("Email sent to teacher: firaslabidi17@gmail.com");
+
+            return savedFeedback;
+        } catch (Exception e) {
+            logger.error("Error saving feedback or sending email", e);
+            throw new RuntimeException("Error saving feedback or sending email", e);  // Re-throwing to be handled by controller
+        }
     }
 
     public List<Feedback> getFeedbacksByCourseId(Long courseId) {
@@ -28,6 +53,7 @@ public class FeedbackService {
     public List<Feedback> getFeedbacksByStudentId(Long studentId) {
         return feedbackRepository.findByStudentId(studentId);
     }
+
     public List<Feedback> getAllFeedbacks() {
         return feedbackRepository.findAll();
     }
@@ -54,6 +80,4 @@ public class FeedbackService {
         }
         return false;
     }
-
 }
-
