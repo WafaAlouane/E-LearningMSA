@@ -19,8 +19,8 @@ public class GatwayApplication {
 		return builder.routes()
 				.route("EVENT-MANAGEMENT", r -> r.path("/events/**")
 						.uri("lb://EVENT-MANAGEMENT"))
-				.route("MICROSERVICE_COURSE_AZIZ", r -> r.path("/courses/**")
-						.uri("lb://MICROSERVICE_COURSE_AZIZ"))
+				.route("MICROSERVICE-COURSE-AZIZ", r -> r.path("/courses/**")
+						.uri("lb://COURSE"))
 
 				.build();
 	}
