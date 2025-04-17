@@ -1,0 +1,36 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+.full-width {
+    width: 100%;
+  }
+  
+  .card-element {
+    margin: 1rem 0;
+  }
+  
+  .payment-form-container {
+    /* Supprimez les contraintes de hauteur */
+    width: 100%;
+    
+    /* Meilleure organisation des éléments */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .card-element {
+    min-height: 150px; /* Plus d'espace pour la carte */
+    padding: 1.5rem;
+  }
+  
+  /* Boutons plus espacés */
+  .d-flex.justify-content-between {
+    margin-top: 2rem;
+    gap: 1rem;
+    
+    button {
+      flex: 1;
+      padding: 0.5rem;
+    }
+  }

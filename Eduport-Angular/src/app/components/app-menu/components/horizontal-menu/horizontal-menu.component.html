@@ -1,0 +1,22 @@
+<ul class="navbar-nav navbar-nav-scroll {{ menuClassName }}">
+  @for (item of menuItems; track $index) {
+    @if (item.subItems) {
+ 
+    }
+  }
+  <!-- Nav item 4 Megamenu-->
+  @if (showMegaMenu) {
+    <app-mega-menu />
+  }
+
+  @if (showContact) {
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/contact-us">
+        @if (showIcon) {
+          <i class="bi bi-headset me-2"></i>
+        }
+        Contact</a
+      >
+    </li>
+  }
+</ul>

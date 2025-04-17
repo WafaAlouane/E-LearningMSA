@@ -1,0 +1,102 @@
+.plans-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      color: #666;
+    }
+  }
+  
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .plan-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+  
+    mat-card-content {
+      flex-grow: 1;
+      
+      .features {
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        
+        li {
+          margin-bottom: 0.5rem;
+          position: relative;
+          
+          &::before {
+            content: '✓';
+            color: #4caf50;
+            position: absolute;
+            left: -1.5rem;
+          }
+        }
+      }
+    }
+  }
+  
+  .success-snackbar {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .error-snackbar {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .warning-snackbar {
+    background-color: #ff9800;
+    color: white;
+  }
+  .payment-form-expanded {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    
+    /* Animation douce pour l'expansion */
+    transition: all 0.3s ease;
+    
+    /* Pour s'assurer que le formulaire a assez d'espace */
+    min-height: 400px;
+  }
+  
+  /* Sur mobile, on réduit un peu les marges */
+  @media (max-width: 768px) {
+    .payment-form-expanded {
+      padding: 1rem;
+      margin-left: -15px;
+      margin-right: -15px;
+      border-radius: 0;
+    }
+  }

@@ -1,0 +1,183 @@
+<app-menu
+  navClassName="container"
+  menuClassName="mx-auto"
+  [SearchWithText]="true"
+/>
+
+<main>
+  <detail-intro />
+
+  <section class="pb-0 py-lg-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card shadow rounded-2 p-0">
+            <div class="card-header border-bottom px-4 py-3">
+              <ul
+                ngbNav
+                #nav="ngbNav"
+                class="nav nav-pills nav-tabs-line py-0"
+                id="course-pills-tab"
+                role="tablist"
+              >
+                <li
+                  ngbNavItem
+                  class="nav-item me-2 me-sm-4"
+                  role="presentation"
+                >
+                  <button
+                    ngbNavLink
+                    class="nav-link mb-2 mb-md-0"
+                    id="course-pills-tab-1"
+                    data-bs-toggle="pill"
+                    data-bs-target="#course-pills-1"
+                    type="button"
+                    role="tab"
+                    aria-controls="course-pills-1"
+                    aria-selected="true"
+                  >
+                    Overview
+                  </button>
+                  <ng-template ngbNavContent>
+                    <detail-overview />
+                  </ng-template>
+                </li>
+
+                <li
+                  ngbNavItem
+                  class="nav-item me-2 me-sm-4"
+                  role="presentation"
+                >
+                  <button
+                    ngbNavLink
+                    class="nav-link mb-2 mb-md-0"
+                    id="course-pills-tab-2"
+                    data-bs-toggle="pill"
+                    data-bs-target="#course-pills-2"
+                    type="button"
+                    role="tab"
+                    aria-controls="course-pills-2"
+                    aria-selected="false"
+                  >
+                    Curriculum
+                  </button>
+                  <ng-template ngbNavContent>
+                    <detail-curriculum />
+                  </ng-template>
+                </li>
+
+                <li
+                  ngbNavItem
+                  class="nav-item me-2 me-sm-4"
+                  role="presentation"
+                >
+                  <button
+                    ngbNavLink
+                    class="nav-link mb-2 mb-md-0"
+                    id="course-pills-tab-3"
+                    data-bs-toggle="pill"
+                    data-bs-target="#course-pills-3"
+                    type="button"
+                    role="tab"
+                    aria-controls="course-pills-3"
+                    aria-selected="false"
+                  >
+                    Instructor
+                  </button>
+                  <ng-template ngbNavContent>
+                    <detail-instructor />
+                  </ng-template>
+                </li>
+
+                <li
+                  ngbNavItem
+                  class="nav-item me-2 me-sm-4"
+                  role="presentation"
+                >
+                  <button
+                    ngbNavLink
+                    class="nav-link mb-2 mb-md-0"
+                    id="course-pills-tab-4"
+                    data-bs-toggle="pill"
+                    data-bs-target="#course-pills-4"
+                    type="button"
+                    role="tab"
+                    aria-controls="course-pills-4"
+                    aria-selected="false"
+                  >
+                    Reviews
+                  </button>
+                  <ng-template ngbNavContent>
+                    <detail-reviews />
+                  </ng-template>
+                </li>
+
+                <li
+                  ngbNavItem
+                  class="nav-item me-2 me-sm-4"
+                  role="presentation"
+                >
+                  <button
+                    ngbNavLink
+                    class="nav-link mb-2 mb-md-0"
+                    id="course-pills-tab-5"
+                    data-bs-toggle="pill"
+                    data-bs-target="#course-pills-5"
+                    type="button"
+                    role="tab"
+                    aria-controls="course-pills-5"
+                    aria-selected="false"
+                  >
+                    FAQs
+                  </button>
+                  <ng-template ngbNavContent>
+                    <detail-faqs />
+                  </ng-template>
+                </li>
+
+                <li
+                  ngbNavItem
+                  class="nav-item me-2 me-sm-4"
+                  role="presentation"
+                >
+                  <button
+                    ngbNavLink
+                    class="nav-link mb-2 mb-md-0"
+                    id="course-pills-tab-6"
+                    data-bs-toggle="pill"
+                    data-bs-target="#course-pills-6"
+                    type="button"
+                    role="tab"
+                    aria-controls="course-pills-6"
+                    aria-selected="false"
+                  >
+                    Comment
+                  </button>
+                  <ng-template ngbNavContent>
+                    <detail-comment />
+                  </ng-template>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-body p-4">
+              <div
+                [ngbNavOutlet]="nav"
+                class="tab-content pt-2"
+                id="course-pills-tabContent"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 pt-5 pt-lg-0">
+          <detail-right-sidebar />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <detail-top-listed-course />
+</main>
+
+<app-footer className="bg-light" />

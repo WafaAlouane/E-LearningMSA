@@ -1,0 +1,76 @@
+<div
+  ngbAccordion
+  [closeOthers]="true"
+  class="accordion accordion-icon accordion-bg-light"
+  id="accordionExample2"
+>
+  @for (item of curriculumList; track $index) {
+    <div
+      ngbAccordionItem
+      [collapsed]="$index == 0 ? false : true"
+      class="accordion-item mb-3"
+    >
+      <h6 ngbAccordionHeader class="accordion-header font-base" id="heading-1">
+        <button
+          ngbAccordionButton
+          class="accordion-button fw-bold rounded d-sm-flex d-inline-block collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse-1"
+          aria-expanded="true"
+          aria-controls="collapse-1"
+        >
+          {{ item.title }}
+          <span class="small ms-0 ms-sm-2"
+            >({{ item.lectures.length }} Lectures)</span
+          >
+        </button>
+      </h6>
+      <div
+        ngbAccordionCollapse
+        id="collapse-1"
+        class="accordion-collapse collapse show"
+        aria-labelledby="heading-1"
+        data-bs-parent="#accordionExample2"
+      >
+        <div ngbAccordionBody class="accordion-body mt-3">
+          <ng-template>
+            @if (item.lectures) {
+              @for (lecture of item.lectures; track lecture; let last = $last) {
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="position-relative d-flex align-items-center">
+                    <a
+                      href="javascript:void(0);"
+                      class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static"
+                    >
+                      <i class="fas fa-play me-0"></i>
+                    </a>
+                    <div class="row g-sm-0 align-items-center">
+                      <div class="col-sm-6">
+                        <span
+                          class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-100px w-md-400px"
+                          >{{ lecture.title }}</span
+                        >
+                      </div>
+                      @if (lecture?.premium) {
+                        <div class="col-sm-6">
+                          <span class="badge text-bg-orange ms-2 ms-md-0"
+                            ><i class="fas fa-lock fa-fw me-1"></i>Premium</span
+                          >
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <p class="mb-0">{{ lecture.duration }}</p>
+                </div>
+                @if (!last) {
+                  <hr />
+                }
+              }
+            }
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  }
+</div>

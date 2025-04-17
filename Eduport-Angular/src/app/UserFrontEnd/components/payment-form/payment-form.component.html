@@ -1,0 +1,94 @@
+<div class="card bg-transparent border rounded-3 mb-4 z-index-9">
+  <div class="card-header bg-transparent d-sm-flex justify-content-sm-between align-items-center border-bottom">
+    <h3 class="mb-2 mb-sm-0">S'abonner à {{ data.plan.name }}</h3>
+    <span class="text-primary fw-bold">{{ data.plan.price | currency }}</span>
+  </div>
+
+  <div class="card-body">
+    <div ngbAccordion [closeOthers]="true" class="accordion accordion-circle" id="accordioncircle">
+      <div ngbAccordionItem [collapsed]="false" class="accordion-item mb-3">
+        <h6 ngbAccordionHeader class="accordion-header font-base" id="heading-1">
+          <button ngbAccordionButton class="accordion-button bg-white rounded collapsed" type="button">
+            Carte de crédit ou de débit
+          </button>
+        </h6>
+        <div ngbAccordionCollapse id="collapse-1" class="accordion-collapse collapse show">
+          <div ngbAccordionBody class="accordion-body">
+            <form [formGroup]="paymentForm" class="row text-start g-3">
+              <div class="col-12">
+                <label class="form-label">Nom sur la carte <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="name"
+                  placeholder="Nom tel qu'affiché sur la carte">
+                <div *ngIf="paymentForm.get('name')?.invalid && paymentForm.get('name')?.touched" class="text-danger small">
+                  Ce champ est obligatoire
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Détails de la carte <span class="text-danger">*</span></label>
+                <div class="card-element border p-2 rounded">
+                  <ngx-stripe-card
+                    [options]="cardOptions"
+                    [elementsOptions]="elementsOptions">
+                  </ngx-stripe-card>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" formControlName="autoRenew" id="autoRenew">
+                  <label class="form-check-label" for="autoRenew">
+                    Renouvellement automatique
+                  </label>
+                </div>
+              </div>
+
+              <div *ngIf="paymentError" class="col-12">
+                <div class="alert alert-danger d-flex align-items-center">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  {{ paymentError }}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer bg-transparent d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-secondary" (click)="dialogRef.close()">Annuler</button>
+    <button 
+      type="button" 
+      class="btn btn-primary" 
+      [disabled]="!paymentForm.valid || loading"
+      (click)="createToken()">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+      {{ loading ? 'Traitement...' : 'Payer maintenant' }}
+    </button>
+  </div>
+</div>
+
+<style>
+.card-element {
+  min-height: 50px;
+  padding: 10px;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #5e72e4;
+  background-color: #f8f9fa;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0,0,0,.125);
+}
+
+.z-index-9 {
+  z-index: 9;
+}
+</style>
