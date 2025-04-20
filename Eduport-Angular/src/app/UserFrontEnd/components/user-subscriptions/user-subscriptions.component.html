@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>Mes abonnements</h1>
+    
+    <div class="controls">
+      <mat-slide-toggle [(ngModel)]="activeOnly" (change)="toggleActiveOnly()">
+        Afficher uniquement les abonnements actifs
+      </mat-slide-toggle>
+    </div>
+  
+    <div *ngIf="loading" class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  
+    <div *ngIf="!loading">
+      <mat-list>
+        <mat-list-item *ngFor="let sub of subscriptions" class="subscription-item">
+          <div mat-line>
+            <strong>{{ sub.plan.name }}</strong> - {{ sub.plan.price | currency }}
+          </div>
+          <div mat-line>
+            Du {{ sub.startDate | date }} au {{ sub.endDate | date }}
+          </div>
+          <div mat-line>
+            Statut: {{ sub.active ? 'Actif' : 'Inactif' }} | 
+            Renouvellement automatique: 
+            <mat-slide-toggle [checked]="sub.autoRenew" (change)="toggleAutoRenew(sub)" [disabled]="!sub.active"></mat-slide-toggle>
+          </div>
+          
+          <button mat-icon-button *ngIf="sub.active" (click)="cancelSubscription(sub.id)" color="warn">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+  
+      <div *ngIf="subscriptions.length === 0" class="no-subscriptions">
+        <p>Aucun abonnement trouvé</p>
+        <button mat-raised-button color="primary" routerLink="/plans">Voir les plans d'abonnement</button>
+      </div>
+    </div>
+  </div>

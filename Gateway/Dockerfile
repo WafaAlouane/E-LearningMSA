@@ -2,7 +2,7 @@
 FROM openjdk:17
 
 # Copier le fichier JAR du microservice Eureka dans le conteneur
-ADD target/Gatway-0.0.1-SNAPSHOT.jar gateway.jar
+ADD target/Gateway-0.0.1-SNAPSHOT.jar gateway.jar
 
 # Exposer le port 8761 (port par défaut d'Eureka)
 EXPOSE 8082

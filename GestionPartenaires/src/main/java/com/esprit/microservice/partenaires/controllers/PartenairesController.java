@@ -35,7 +35,7 @@ public class PartenairesController {
         Partenaires p = service.getPartnerById(id);
 
         if (p == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 si l'ID est introuvable
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(p, HttpStatus.OK); // 200 OK si tout va bien    }
     }
@@ -88,14 +88,14 @@ public class PartenairesController {
 
     //PUT /api/partenaires/activation/3?active=true
     @PutMapping("/activation/{id}")
-    public ResponseEntity<Partenaires> toggleActivation(
-            @PathVariable Long id,
-            @RequestParam boolean active) {
-
+    public ResponseEntity<Partenaires> toggleActivation(@PathVariable Long id, @RequestParam boolean active) {
         try {
+            System.out.println("ID: " + id + ", Active: " + active); // Log request parameters
             Partenaires updated = service.toggleActivation(id, active);
+            System.out.println("Updated Partenaire: " + updated); // Log the updated object
             return new ResponseEntity<>(updated, HttpStatus.OK);
         } catch (RuntimeException e) {
+            System.err.println("Error: " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

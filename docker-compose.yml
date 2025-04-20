@@ -13,7 +13,7 @@ services:
       - projectMsA
 
   gateway:
-    image: doussa1998/mini-project-gateway:latest
+    build: ./gateway  
     container_name: gateway
     ports:
       - "8082:8082"
@@ -70,6 +70,15 @@ services:
       - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
       - spring.jpa.show-sql=true
       - spring.cloud.config.enabled=false
+    networks:
+      - projectMsA
+  frontend:
+    build: ./Eduport-Angular  # Assure-toi que le projet Angular est dans ./frontend
+    container_name: angular-app
+    ports:
+      - "4200:4200"
+    depends_on:
+      - gateway
     networks:
       - projectMsA
 
