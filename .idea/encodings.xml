@@ -5,5 +5,8 @@
     <file url="file://$PROJECT_DIR$/EventManagement/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Feedback-Serrvice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/GestionPartenaires/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/MicroService_Course_Aziz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/userBackend/src/main/java" charset="UTF-8" />
   </component>
 </project>

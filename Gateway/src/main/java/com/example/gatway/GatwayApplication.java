@@ -19,8 +19,15 @@ public class GatwayApplication {
 		return builder.routes()
 				.route("EVENT-MANAGEMENT", r -> r.path("/events/**")
 						.uri("lb://EVENT-MANAGEMENT"))
+
 				.route("FEEDBACK-SERVICE", r -> r.path("/feedback/**")
 						.uri("lb://FEEDBACK-SERVICE"))
+				.route("USER-BACKEND", r -> r.path("/api/users/**")
+						.uri("lb://USER-BACKEND"))
+				.route("COURSE", r -> r.path("/courses/**")
+						.uri("lb://COURSE"))
+				.route("gestion-partenaires", r -> r.path("/api/partenaires/**")
+						.uri("lb://GESTIONPARTENAIRES"))
 				.build();
 	}
 }
