@@ -1,0 +1,6 @@
+com\esprit\microservice\partenaires\GestionPartenairesApplication.class
+com\esprit\microservice\partenaires\controllers\PartenairesController.class
+com\esprit\microservice\partenaires\services\PartenairesService.class
+com\esprit\microservice\partenaires\WebConfig.class
+com\esprit\microservice\partenaires\entities\Partenaires.class
+com\esprit\microservice\partenaires\repositories\PartenairesRepository.class

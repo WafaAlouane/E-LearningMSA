@@ -1,0 +1,8 @@
+org\course\microservice_course_aziz\MicroServiceCourseAzizApplication.class
+org\course\microservice_course_aziz\services\EmailService.class
+org\course\microservice_course_aziz\entity\Course.class
+org\course\microservice_course_aziz\controller\CourseController.class
+org\course\microservice_course_aziz\repository\CourseRepository.class
+org\course\microservice_course_aziz\services\CourseServiceImpl.class
+org\course\microservice_course_aziz\services\ICourseService.class
+org\course\microservice_course_aziz\services\CourseraCourseService.class
